@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Aplikacja Pogodowa</string>
+    <string name="first_fragment_label">Pierwszy Fragment</string>
+    <string name="second_fragment_label">Drugi Fragment</string>
+    <string name="next">Następny</string>
+    <string name="previous">Poprzedni</string>
+
+    <string name="hello_first_fragment">Witaj Pierwszy fragmencie</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+</resources>
