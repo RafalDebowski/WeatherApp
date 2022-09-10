@@ -10,7 +10,7 @@ import debowski.rafal.weatherapp.R
 import debowski.rafal.weatherapp.databinding.FragmentFirstBinding
 
 class FirstFragment : Fragment() {
-gi
+
     private lateinit var binding: FragmentFirstBinding
 
     override fun onCreateView(
