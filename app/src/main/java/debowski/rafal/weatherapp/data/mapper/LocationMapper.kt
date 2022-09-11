@@ -6,7 +6,7 @@ import debowski.rafal.weatherapp.data.entity.LocationEntity
 
 fun LocationDto.toLocationDomain(): LocationDomain =
     LocationDomain(
-        name = this.name.orEmpty(),
+        name = this.name.orEmpty().uppercase(),
         country = this.country.orEmpty(),
         region = this.region.orEmpty(),
         lat = this.lat.orEmpty(),
@@ -19,7 +19,7 @@ fun LocationDto.toLocationDomain(): LocationDomain =
 
 fun LocationDomain.toLocationDto(): LocationDto =
     LocationDto(
-        name = this.name,
+        name = this.name.uppercase(),
         country = this.country,
         region = this.region,
         lat = this.lat,
@@ -33,7 +33,7 @@ fun LocationDomain.toLocationDto(): LocationDto =
 fun LocationDomain.toLocationEntity(): LocationEntity =
     LocationEntity(
         currentWeatherId = this.currentWeatherId,
-        name = this.name,
+        name = this.name.uppercase(),
         country = this.country,
         region = this.region,
         lat = this.lat,
@@ -47,7 +47,7 @@ fun LocationDomain.toLocationEntity(): LocationEntity =
 fun LocationEntity.toLocationDomain(): LocationDomain =
     LocationDomain(
         id = this.id,
-        name = this.name,
+        name = this.name.uppercase(),
         country = this.country,
         region = this.region,
         lat = this.lat,

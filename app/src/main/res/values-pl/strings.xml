@@ -8,6 +8,10 @@
     <string name="check_the_weather">Sprawdź pogodę</string>
     <string name="welcome">Witam w mojej prostej aplikacji pogodowej, wpisz nazwę miasta i sprawdź obecną pogodę :D</string>
     <string name="feeling">Odczucie</string>
+    <string name="data_loading_error">Błąd wczytania danych</string>
+    <string name="Invalid_city_name">Nieprawidłowa nazwa miasta</string>
+    <string name="no_internet">Brak połaczenia internetowego :(</string>
+
 
     <string name="hello_first_fragment">Witaj Pierwszy fragmencie</string>
     <string name="hello_second_fragment">Witaj drugi fragmenie. Arg: %1$s</string>

@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import debowski.rafal.weatherapp.R
 import debowski.rafal.weatherapp.databinding.FragmentFirstBinding
 import debowski.rafal.weatherapp.ui.BaseFragment
+import debowski.rafal.weatherapp.ui.activity.MainActivity
 import debowski.rafal.weatherapp.ui.activity.MainActivity.Companion.CITY_NAME
 
 class FirstFragment : BaseFragment() {
@@ -47,9 +48,19 @@ class FirstFragment : BaseFragment() {
                 }
                 is FirstViewModel.Action.ShowError -> {
                     Toast.makeText(
-                        context, action.message ?: "Błąd wczytania danych",
+                        context,
+                        action.message ?: getString(R.string.data_loading_error),
                         Toast.LENGTH_LONG
                     ).show()
+                }
+                is FirstViewModel.Action.GetDataFromApi -> {
+                    if (checkNetworkConnection()) {
+                        viewModel.getCurrentWeatherByCityNameFromAPI(action.cityName)
+                    } else {
+                        viewModel.action.value = FirstViewModel.Action.ShowError(
+                            getString(R.string.no_internet)
+                        )
+                    }
                 }
             }
         }
@@ -57,12 +68,25 @@ class FirstFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initButtons()
+    }
 
+    private fun initButtons() {
         binding.buttonFirst.setOnClickListener {
             binding.cityEditText.text?.let {
-                viewModel.getCurrentWeatherByCityNameFromDB(it.toString())
+                if (viewModel.isCanCheckWeather(it.toString())) {
+                    viewModel.getCurrentWeatherByCityNameFromDB(it.toString().uppercase())
+                } else {
+                    viewModel.action.value = FirstViewModel.Action.ShowError(
+                        getString(R.string.Invalid_city_name)
+                    )
+                }
             }
         }
+    }
+
+    private fun checkNetworkConnection(): Boolean {
+        return (activity as? MainActivity)?.isOnline() ?: false
     }
 
 }

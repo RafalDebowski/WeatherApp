@@ -1,6 +1,7 @@
 package debowski.rafal.weatherapp.ui.fragment.first
 
 import android.util.Log
+import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import debowski.rafal.weatherapp.data.domain.CurrentWeatherDomain
@@ -17,7 +18,7 @@ class FirstViewModel @Inject constructor(
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
     var action = MutableLiveData<Action>()
     var currentWeatherDomain = MutableLiveData<CurrentWeatherDomain>()
-
+    var canCheckWeather: Boolean = false
 
     fun getCurrentWeatherByCityNameFromDB(cityName: String) {
         val disposable = weatherUseCase
@@ -27,13 +28,16 @@ class FirstViewModel @Inject constructor(
             .subscribe({
                 action.postValue(Action.SaveSuccess)
             }, {
-                getCurrentWeatherByCityNameFromAPI(cityName)
+                action.postValue(Action.GetDataFromApi(cityName))
             })
 
         compositeDisposable.add(disposable)
     }
 
-    private fun getCurrentWeatherByCityNameFromAPI(city: String) {
+    fun isCanCheckWeather(cityName: String) =
+        cityName.length > 3 && cityName.isNotEmpty() && cityName.chars().allMatch(Character::isLetter)
+
+    fun getCurrentWeatherByCityNameFromAPI(city: String) {
         val disposable = weatherUseCase
             .getCurrentWeatherByCityNameFromAPI(city)
             .flatMapCompletable {
@@ -57,5 +61,9 @@ class FirstViewModel @Inject constructor(
         ) : Action()
 
         object SaveSuccess : Action()
+
+        data class GetDataFromApi(
+            val cityName: String
+        ) : Action()
     }
 }

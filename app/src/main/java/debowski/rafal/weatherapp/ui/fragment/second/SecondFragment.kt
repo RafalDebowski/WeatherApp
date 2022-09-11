@@ -57,7 +57,7 @@ class SecondFragment : BaseFragment() {
         }
 
         viewModel.cityName.observe(viewLifecycleOwner) {
-            viewModel.getCurrentWeatherByCityName(it)
+            viewModel.getCurrentWeatherByCityName(it.uppercase())
         }
 
         viewModel.currentWeather.observe(viewLifecycleOwner) {
