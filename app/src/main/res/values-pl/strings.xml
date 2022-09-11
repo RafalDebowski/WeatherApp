@@ -6,5 +6,7 @@
     <string name="previous">Poprzedni</string>
 
     <string name="hello_first_fragment">Witaj Pierwszy fragmencie</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="hello_second_fragment">Witaj drugi fragmenie. Arg: %1$s</string>
+    <string name="enter_city_name">Podaj nazwę miasta</string>
+
 </resources>

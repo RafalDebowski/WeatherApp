@@ -4,20 +4,19 @@ import androidx.annotation.Keep
 
 @Keep
 data class CurrentDto(
-    val observationTime: String,
-    val temperature: Long,
-    val weatherCode: Long,
-    val weatherIcons: String,
-    val weatherDescription: String,
-    val windSpeed: Long,
-    val windDegree: Long,
-    val windDir: String,
-    val pressure : Long,
-    val precip: Long,
-    val humidity: Long,
-    val cloudCover: Long,
-    val feelsLike: Long,
-    val uvIndex: Long,
-    val visibility: Long
+    val observation_time: String?,
+    val temperature: Int?,
+    val weather_code: Int?,
+    val weather_icons: Array<String>?,
+    val weather_descriptions: Array<String>?,
+    val wind_speed: Int?,
+    val wind_degree: Int?,
+    val wind_dir: String?,
+    val pressure: Int?,
+    val humidity: Int?,
+    val feelslike: Int?,
+    val cloudCover: Int?,
+    val uvIndex: Int?,
+    val visibility: Int?
 ) {
 }

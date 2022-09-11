@@ -1,8 +1,13 @@
-package debowski.rafal.weatherapp.data.domain
+package debowski.rafal.weatherapp.data.entity
 
-data class LocationDomain(
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity
+data class LocationEntity(
+    @PrimaryKey(autoGenerate = true)
     val id: Long? = null,
-    var currentWeatherId: Long? = null,
+    var currentWeatherId: Long?,
     val name: String,
     val country: String,
     val region: String,

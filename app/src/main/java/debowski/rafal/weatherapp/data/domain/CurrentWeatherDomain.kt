@@ -1,9 +1,8 @@
 package debowski.rafal.weatherapp.data.domain
 
-
-
 data class CurrentWeatherDomain(
-    val requestDto: RequestDomain,
-    val locationDto: LocationDomain,
-    val currentDto: CurrentDomain
+    val id: Long,
+    val request: RequestDomain?,
+    val location: LocationDomain?,
+    val current: CurrentDomain?
 )

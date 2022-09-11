@@ -3,7 +3,9 @@ package debowski.rafal.weatherapp.di.modules
 import dagger.Module
 import dagger.Provides
 import debowski.rafal.weatherapp.api.WeatherApi
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
@@ -19,8 +21,10 @@ class ApiModule {
     fun provideWeatherApi() : Retrofit =
         Retrofit.Builder()
             .baseUrl(BASE_URL)
+            .client(OkHttpClient())
             .addConverterFactory(GsonConverterFactory.create())
-            .build();
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+    .build()
 
     @Provides
     fun providesWeatherApi(retrofit: Retrofit) : WeatherApi =
