@@ -1,7 +1,6 @@
 package debowski.rafal.weatherapp.ui.fragment.first
 
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import debowski.rafal.weatherapp.data.domain.CurrentWeatherDomain
@@ -19,9 +18,24 @@ class FirstViewModel @Inject constructor(
     var action = MutableLiveData<Action>()
     var currentWeatherDomain = MutableLiveData<CurrentWeatherDomain>()
 
-    fun getCurrentWeatherByCityName(city: String) {
+
+    fun getCurrentWeatherByCityNameFromDB(cityName: String) {
         val disposable = weatherUseCase
-            .getCurrentWeatherByCityName(city)
+            .getWheatherByCityNameFromDB(cityName)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                action.postValue(Action.SaveSuccess)
+            }, {
+                getCurrentWeatherByCityNameFromAPI(cityName)
+            })
+
+        compositeDisposable.add(disposable)
+    }
+
+    private fun getCurrentWeatherByCityNameFromAPI(city: String) {
+        val disposable = weatherUseCase
+            .getCurrentWeatherByCityNameFromAPI(city)
             .flatMapCompletable {
                 currentWeatherDomain.postValue(it)
                 weatherUseCase.insertCurrentWeather(it)
@@ -31,8 +45,7 @@ class FirstViewModel @Inject constructor(
             .subscribe({
                 action.postValue(Action.SaveSuccess)
             }, { error ->
-                action.postValue(Action.ShowError(error.message.toString()))
-                Log.e("ERROR", error.message.toString())
+                action.postValue(Action.ShowError(error.message))
             })
 
         compositeDisposable.add(disposable)
@@ -40,7 +53,7 @@ class FirstViewModel @Inject constructor(
 
     sealed class Action {
         data class ShowError(
-            val message: String
+            val message: String?
         ) : Action()
 
         object SaveSuccess : Action()

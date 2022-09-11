@@ -1,9 +1,6 @@
 package debowski.rafal.weatherapp.repository
 
-import debowski.rafal.weatherapp.data.domain.CurrentDomain
-import debowski.rafal.weatherapp.data.domain.CurrentWeatherDomain
-import debowski.rafal.weatherapp.data.domain.LocationDomain
-import debowski.rafal.weatherapp.data.domain.RequestDomain
+import debowski.rafal.weatherapp.data.domain.*
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 
@@ -14,4 +11,5 @@ interface WeatherRepository {
     fun insertCurrent(current: CurrentDomain): Completable
     fun insertLocation(location: LocationDomain): Completable
     fun insertRequest(request: RequestDomain): Completable
+    fun getWheatherByCityName(city: String) : Single<Weather>
 }

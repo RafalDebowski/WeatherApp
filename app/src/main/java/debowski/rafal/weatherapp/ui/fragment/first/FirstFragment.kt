@@ -46,7 +46,10 @@ class FirstFragment : BaseFragment() {
                     )
                 }
                 is FirstViewModel.Action.ShowError -> {
-                    Toast.makeText(context, action.message, Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        context, action.message ?: "Błąd wczytania danych",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
         }
@@ -57,7 +60,7 @@ class FirstFragment : BaseFragment() {
 
         binding.buttonFirst.setOnClickListener {
             binding.cityEditText.text?.let {
-                viewModel.getCurrentWeatherByCityName(it.toString())
+                viewModel.getCurrentWeatherByCityNameFromDB(it.toString())
             }
         }
     }

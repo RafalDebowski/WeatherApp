@@ -1,10 +1,7 @@
 package debowski.rafal.weatherapp.repository
 
 import debowski.rafal.weatherapp.api.WeatherApi
-import debowski.rafal.weatherapp.data.domain.CurrentDomain
-import debowski.rafal.weatherapp.data.domain.CurrentWeatherDomain
-import debowski.rafal.weatherapp.data.domain.LocationDomain
-import debowski.rafal.weatherapp.data.domain.RequestDomain
+import debowski.rafal.weatherapp.data.domain.*
 import debowski.rafal.weatherapp.data.mapper.*
 import debowski.rafal.weatherapp.db.AppDatabase
 import io.reactivex.rxjava3.core.Completable
@@ -40,4 +37,6 @@ class WeatherRepositoryImpl(
     override fun insertRequest(request: RequestDomain): Completable =
         requestDao.insertRequest(request.toRequestEntity())
 
+    override fun getWheatherByCityName(city: String): Single<Weather> =
+        currentWeatherDao.getWheatherByCityName(city)
 }

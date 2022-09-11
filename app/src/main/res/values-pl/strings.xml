@@ -4,6 +4,10 @@
     <string name="second_fragment_label">Drugi Fragment</string>
     <string name="next">Następny</string>
     <string name="previous">Poprzedni</string>
+    <string name="search_again">Wyszukaj ponownie</string>
+    <string name="check_the_weather">Sprawdź pogodę</string>
+    <string name="welcome">Witam w mojej prostej aplikacji pogodowej, wpisz nazwę miasta i sprawdź obecną pogodę :D</string>
+    <string name="feeling">Odczucie</string>
 
     <string name="hello_first_fragment">Witaj Pierwszy fragmencie</string>
     <string name="hello_second_fragment">Witaj drugi fragmenie. Arg: %1$s</string>
